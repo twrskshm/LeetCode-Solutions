@@ -7,6 +7,7 @@ public class ContainsDuplicateI {
             if(hashSet.contains(x)) {
                 return true;
             }
+
             hashSet.add(x);
         }
 
