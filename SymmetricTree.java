@@ -1,13 +1,39 @@
+import java.util.LinkedList;
+
 public class SymmetricTree {
+    public static boolean isSymmetric(TreeNode root) {
+        LinkedList<TreeNode> queue = new LinkedList();
+        queue.add(root);
+        queue.add(root);
+
+        while(!queue.isEmpty()) {
+            TreeNode one = queue.poll(), two = queue.poll();
+
+            if(one == null && two == null) continue;
+
+            if(one == null || two == null) return false;
+
+            if(one.val != two.val) return false;
+
+            queue.add(one.left);
+            queue.add(two.right);
+            queue.add(one.right);
+            queue.add(two.left);
+        }
+
+        return true;
+    }
+
     public static boolean isSymmetric(TreeNode root) {
         return symmetric(root, root);
     }
 
-    public static boolean symmetric(TreeNode root_one, TreeNode root_two) {
-        if(root_one == null && root_two == null) return true;
-        if(root_one == null || root_two == null) return false;
+    public static boolean symmetric(TreeNode one, TreeNode two) {
+        if(one == null && two == null) return true;
 
-        return (root_one.val == root_two.val) && symmetric(root_one.left, root_two.right) && symmetric(root_one.right, root_two.left);
+        if(one == null || two == null) return false;
+
+        return (one.val == two.val) && symmetric(one.right, two.left) && symmetric(one.left, two.right);
     }
 }
 
@@ -16,7 +42,5 @@ class TreeNode {
     TreeNode left;
     TreeNode right;
 
-    TreeNode(int x) {
-        val = x;
-    }
+    TreeNode(int x) { val = x; }
 }
