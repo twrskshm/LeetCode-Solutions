@@ -5,7 +5,7 @@ public class HappyNumber {
         HashSet<Integer> seenBefore = new HashSet<>();
 
         while (n != 1) {
-            if(seenBefore.contains(n))
+            if (seenBefore.contains(n))
                 return false;
 
             int temporaryN = n, sum = 0;
